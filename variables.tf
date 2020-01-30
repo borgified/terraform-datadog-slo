@@ -13,6 +13,11 @@ variable "name" {
   type        = "string"
 }
 
+variable "loadbalancer_type" {
+  description = "if set to \"application\" will use aws.applicationelb.* metrics, otherwise will use aws.elb.* metrics"
+  type        = "string"
+}
+
 variable "description" {
   description = "(Optional) A description of this service level objective."
   type        = "string"
@@ -39,7 +44,7 @@ variable "thresholds" {
 
 variable "filter_tags" {
   description = "(Required) The list of tags to select specific metrics."
-  type = "string"
+  type        = "string"
 }
 
 variable "monitor_ids" {

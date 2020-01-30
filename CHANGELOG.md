@@ -1,4 +1,6 @@
 # CHANGELOG.md
+v0.2.2
+- more README fixes
 v0.2.1
 - Fix README
 v0.2.0

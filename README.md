@@ -1,7 +1,5 @@
 # terraform module for datadog slo dashboard
 
-Assumes you are using aws.applicationelb (instead of elb)
-
 To use this terraform module add the following to your terraform code:
 
 ```

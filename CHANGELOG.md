@@ -1,4 +1,8 @@
 # CHANGELOG.md
+v0.3.2
+- Changed various thresholds and SLO values:
+  SLO standardized to target 99 with warning 99.9
+  Availability now based on ratio of good responses / total responses at .99
 v0.3.1
 - Removed: `var.groups` since it is unused.
 

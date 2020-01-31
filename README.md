@@ -5,7 +5,7 @@ To use this terraform module add the following to your terraform code:
 ```
 module "slo_dashboard" {
   source  = "borgified/slo/datadog"
-  version = "0.3.1"
+  version = "0.3.2"
   api_key = "xxxxxxxxxxxxxx"
   app_key = "xxxxxxxxxxxxxx"
   loadbalancer_type = "application"

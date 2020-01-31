@@ -34,9 +34,3 @@ variable "filter_tags" {
   description = "(Required) The list of tags to select specific metrics."
   type        = "string"
 }
-
-variable "groups" {
-  description = "(Optional) A custom set of groups from the monitor(s) for which to use as the SLI instead of all the groups."
-  type        = "list"
-  default     = [1]
-}

@@ -21,11 +21,9 @@ resource "datadog_service_level_objective" "availability" {
   }
 
   thresholds {
-    timeframe       = var.thresholds.timeframe
-    target          = var.thresholds.target
-    warning         = var.thresholds.warning
-    target_display  = var.thresholds.target_display
-    warning_display = var.thresholds.warning_display
+    timeframe = "30d"
+    target    = "95"
+    warning   = "97.5"
   }
 
   tags = concat(["slo:availability"], var.tags)
@@ -59,7 +57,7 @@ resource "datadog_monitor" "availability" {
   type    = "metric alert"
   message = "Availability Monitor for ${var.name}"
 
-  query = "max(last_1h):(sum:aws.applicationelb.httpcode_elb_4xx{${var.filter_tags}}.as_count()+sum:aws.applicationelb.httpcode_target_4xx{${var.filter_tags}}.as_count()+sum:aws.applicationelb.httpcode_target_3xx{${var.filter_tags}}.as_count()+sum:aws.applicationelb.httpcode_target_2xx{${var.filter_tags}}.as_count()) / (sum:aws.applicationelb.httpcode_elb_4xx{${var.filter_tags}}.as_count()+sum:aws.applicationelb.httpcode_target_4xx{${var.filter_tags}}.as_count()+sum:aws.applicationelb.httpcode_target_3xx{${var.filter_tags}}.as_count()+sum:aws.applicationelb.httpcode_target_2xx{${var.filter_tags}}.as_count()+sum:aws.applicationelb.httpcode_elb_5xx{${var.filter_tags}}.as_count()+sum:aws.applicationelb.httpcode_target_5xx{${var.filter_tags}}.as_count()) < .99"
+  query = "max(last_1h):(sum:aws.applicationelb.httpcode_elb_4xx{${var.filter_tags}}.as_count()+sum:aws.applicationelb.httpcode_target_4xx{${var.filter_tags}}.as_count()+sum:aws.applicationelb.httpcode_target_3xx{${var.filter_tags}}.as_count()+sum:aws.applicationelb.httpcode_target_2xx{${var.filter_tags}}.as_count()) / (sum:aws.applicationelb.httpcode_elb_4xx{${var.filter_tags}}.as_count()+sum:aws.applicationelb.httpcode_target_4xx{${var.filter_tags}}.as_count()+sum:aws.applicationelb.httpcode_target_3xx{${var.filter_tags}}.as_count()+sum:aws.applicationelb.httpcode_target_2xx{${var.filter_tags}}.as_count()+sum:aws.applicationelb.httpcode_elb_5xx{${var.filter_tags}}.as_count()+sum:aws.applicationelb.httpcode_target_5xx{${var.filter_tags}}.as_count()) < .95"
 
   require_full_window = true
   notify_no_data      = false
@@ -81,8 +79,8 @@ resource "datadog_service_level_objective" "latency" {
 
   thresholds {
     timeframe = "30d"
-    target    = "99"
-    warning   = "99.9"
+    target    = "95"
+    warning   = "97.5"
   }
 
   tags = concat(["slo:latency"], var.tags)
@@ -102,12 +100,12 @@ resource "datadog_dashboard" "slo" {
         aggregator = "last"
         conditional_formats {
           comparator = "<"
-          value      = "99.98"
+          value      = "95.00"
           palette    = "white_on_red"
         }
         conditional_formats {
           comparator = ">="
-          value      = "99.98"
+          value      = "95.00"
           palette    = "white_on_green"
         }
       }

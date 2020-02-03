@@ -16,8 +16,8 @@ resource "datadog_service_level_objective" "availability" {
   type        = "metric"
   description = var.description
   query {
-    numerator   = "${var.loadbalancer_type == "application" ? local.applicationelb_numerator : local.elb_numerator}"
-    denominator = "${var.loadbalancer_type == "application" ? local.applicationelb_denominator : local.elb_denominator}"
+    numerator   = var.loadbalancer_type == "application" ? local.applicationelb_numerator : local.elb_numerator
+    denominator = var.loadbalancer_type == "application" ? local.applicationelb_denominator : local.elb_denominator
   }
 
   thresholds {

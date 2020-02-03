@@ -1,4 +1,8 @@
 # CHANGELOG.md
+v0.3.3
+- tf validate fixes
+  Warning: Interpolation-only expressions are deprecated
+  Warning: Quoted type constraints are deprecated
 v0.3.2
 - Changed various thresholds and SLO values:
   SLO standardized to target 99 with warning 99.9
